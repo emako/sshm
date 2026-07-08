@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\Sshm.UI\Sshm.UI.csproj" />
+    <ProjectReference Include="..\Sshm.Config\Sshm.Config.csproj" />
+    <ProjectReference Include="..\Sshm.History\Sshm.History.csproj" />
+    <ProjectReference Include="..\Sshm.Connectivity\Sshm.Connectivity.csproj" />
+    <ProjectReference Include="..\Sshm.Validation\Sshm.Validation.csproj" />
+    <ProjectReference Include="..\Sshm.Version\Sshm.Version.csproj" />
+    <ProjectReference Include="..\Sshm.Core\Sshm.Core.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <LangVersion>preview</LangVersion>
+  </PropertyGroup>
+
+</Project>
