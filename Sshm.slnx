@@ -1,12 +1,5 @@
 <Solution>
   <Folder Name="/src/">
-    <Project Path="src/Sshm.Config/Sshm.Config.csproj" />
-    <Project Path="src/Sshm.Connectivity/Sshm.Connectivity.csproj" />
-    <Project Path="src/Sshm.Core/Sshm.Core.csproj" />
-    <Project Path="src/Sshm.History/Sshm.History.csproj" />
-    <Project Path="src/Sshm.UI/Sshm.UI.csproj" />
-    <Project Path="src/Sshm.Validation/Sshm.Validation.csproj" />
-    <Project Path="src/Sshm.Version/Sshm.Version.csproj" />
     <Project Path="src/Sshm/Sshm.csproj" />
   </Folder>
 </Solution>
