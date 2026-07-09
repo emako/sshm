@@ -46,13 +46,6 @@ public sealed class AppConfig
 
 public static class AppConfigService
 {
-    private static readonly JsonSerializerOptions JsonOptions = new()
-    {
-        WriteIndented = true,
-        PropertyNamingPolicy = null,
-        DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
-    };
-
     public static KeyBindings GetDefaultKeyBindings()
     {
         return new KeyBindings
@@ -93,7 +86,7 @@ public static class AppConfigService
         }
 
         string data = File.ReadAllText(configPath);
-        AppConfig? config = JsonSerializer.Deserialize<AppConfig>(data, JsonOptions);
+        AppConfig? config = JsonSerializer.Deserialize(data, SshmJsonContext.Default.AppConfig);
         if (config == null)
         {
             throw new JsonException("Failed to deserialize application configuration.");
@@ -110,7 +103,7 @@ public static class AppConfigService
         string configDir = Path.GetDirectoryName(configPath)!;
         Directory.CreateDirectory(configDir);
 
-        string data = JsonSerializer.Serialize(config, JsonOptions);
+        string data = JsonSerializer.Serialize(config, SshmJsonContext.Default.AppConfig);
         File.WriteAllText(configPath, data);
     }
 

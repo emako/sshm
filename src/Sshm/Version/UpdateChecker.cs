@@ -58,7 +58,7 @@ public static class UpdateChecker
         using HttpResponseMessage response = await HttpClient.SendAsync(request, cancellationToken).ConfigureAwait(false);
         response.EnsureSuccessStatusCode();
 
-        GitHubRelease? release = await response.Content.ReadFromJsonAsync<GitHubRelease>(cancellationToken).ConfigureAwait(false);
+        GitHubRelease? release = await response.Content.ReadFromJsonAsync(SshmJsonContext.Default.GitHubRelease, cancellationToken).ConfigureAwait(false);
         if (release == null || release.Prerelease || release.Draft)
         {
             return new UpdateInfo

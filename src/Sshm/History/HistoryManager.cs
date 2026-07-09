@@ -1,3 +1,4 @@
+using System.Text.Json;
 using System.Text.Json.Serialization;
 using Sshm.Config;
 using Sshm.Core.Models;
@@ -65,7 +66,7 @@ public sealed class HistoryManager
         if (File.Exists(historyPath))
         {
             string json = File.ReadAllText(historyPath);
-            loaded = System.Text.Json.JsonSerializer.Deserialize<ConnectionHistory>(json) ?? new ConnectionHistory();
+            loaded = JsonSerializer.Deserialize(json, SshmJsonContext.Default.ConnectionHistory) ?? new ConnectionHistory();
         }
 
         return new HistoryManager(historyPath, loaded);
@@ -220,10 +221,7 @@ public sealed class HistoryManager
             Directory.CreateDirectory(dir);
         }
 
-        string json = System.Text.Json.JsonSerializer.Serialize(history, new System.Text.Json.JsonSerializerOptions
-        {
-            WriteIndented = true,
-        });
+        string json = JsonSerializer.Serialize(history, SshmJsonContext.Default.ConnectionHistory);
         File.WriteAllText(historyPath, json);
     }
 }
