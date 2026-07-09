@@ -1,3 +1,5 @@
+# ![LogoTitlebar](branding/LogoTitlebar.png)
+
 # SSHM - SSH Manager (.NET)
 
 [![.NET](https://img.shields.io/badge/.NET-10.0-512BD4?style=for-the-badge&logo=dotnet)](https://dotnet.microsoft.com/)
@@ -340,6 +342,8 @@ sshm/
 ## Relationship to Upstream
 
 This project is a **.NET reimplementation** of [Gu1llaum-3/sshm](https://github.com/Gu1llaum-3/sshm). Feature design, keyboard layout, data formats, and SSH config conventions follow the original Go tool.
+
+For icons, see the **[upstream repository](https://github.com/sshnet/SSH.NET)**.
 
 For release binaries, install scripts, and the full CLI command reference, see the **[upstream repository](https://github.com/Gu1llaum-3/sshm)**.
 
