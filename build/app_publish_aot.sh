@@ -62,7 +62,18 @@ parse_targets() {
     printf '%s\n' "${input[@]}"
 }
 
-publish_output_name() {
+remove_unused_publish_artifacts() {
+    local output_dir="$1"
+    local name path
+    for name in libonigwrap.dll libonigwrap.so libonigwrap.dylib; do
+        path="$output_dir/$name"
+        if [[ -f "$path" ]]; then
+            rm -f "$path"
+            echo "Removed unused artifact: $path"
+        fi
+    done
+}
+
     case "$1" in
         win-*) echo "sshm.exe" ;;
         *) echo "sshm" ;;
@@ -119,6 +130,8 @@ for runtime in "${TARGETS[@]}"; do
         echo "Expected output not found: $output_path" >&2
         exit 1
     fi
+
+    remove_unused_publish_artifacts "$output_dir"
 
     size_mb="$(du -m "$output_path" | cut -f1)"
     echo "Done: $output_path (${size_mb} MB)"

@@ -88,6 +88,25 @@ function Get-PublishOutputName {
     return "sshm"
 }
 
+function Remove-UnusedPublishArtifacts {
+    param([string]$OutputDir)
+
+    # Onigwrap is pulled in by Terminal.Gui -> TextMateSharp but unused by sshm.
+    $UnusedNative = @(
+        "libonigwrap.dll",
+        "libonigwrap.so",
+        "libonigwrap.dylib"
+    )
+
+    foreach ($name in $UnusedNative) {
+        $path = Join-Path $OutputDir $name
+        if (Test-Path $path) {
+            Remove-Item $path -Force
+            Write-Host "Removed unused artifact: $path"
+        }
+    }
+}
+
 function Publish-SshmTarget {
     param(
         [string]$Runtime,
@@ -123,6 +142,8 @@ function Publish-SshmTarget {
     if (-not (Test-Path $OutputPath)) {
         throw "Expected output not found: $OutputPath"
     }
+
+    Remove-UnusedPublishArtifacts -OutputDir $OutputDir
 
     $Size = (Get-Item $OutputPath).Length / 1MB
     Write-Host ("Done: {0} ({1:N1} MB)" -f $OutputPath, $Size)
